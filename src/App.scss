@@ -1,11 +1,14 @@
 body {
-  height: 100vh;
+  min-height: 100vh;
   width: 100%;
   overflow: hidden;
   background: linear-gradient(to right, #6441A5, #2a0845);
   color: #fff;
-  /* font-family: 'Exo 2', sans-serif; */
   font-family: 'Russo One', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
 }
 
 #root {
@@ -14,7 +17,7 @@ body {
 }
 
 .App {
-  height: 100%;
+  height: 100vh;
   display: flex;
   align-items: center;
   justify-content: space-evenly;
@@ -31,7 +34,7 @@ body {
   display: grid;
   grid-template: repeat(3, 1fr)/repeat(3, 1fr);
   transform: translate(0);
-  opacity: 1; 
+  opacity: 1;
   transition: opacity 2s linear, height 2s step-start;
   margin-top: 30px;
 }
@@ -84,7 +87,7 @@ body {
 .modal button {
   background-color: transparent;
   border: 2px solid rgba(255, 255, 255, .5);
-  color:#fff;
+  color: #fff;
   font-size: calc(1em + .5vw);
   padding: 5px 20px;
   border-radius: 5px;
@@ -94,7 +97,7 @@ body {
 
 .modal button:hover {
   background-color: rgba(255, 255, 255, .5);
-  color:#6441A5;
+  color: #6441A5;
 
 }
 
@@ -104,6 +107,12 @@ body {
   top: 3vh;
   width: 300px;
   text-align: center;
+}
+
+.game-info {
+  display: flex;
+  flex-direction: column;
+  width: 320px;
 }
 
 .static-list {
@@ -134,7 +143,6 @@ body {
 }
 
 .new {
-  margin-top: 20px;
   padding: 3px 20px;
   background-color: transparent;
   color: #fff;
@@ -145,6 +153,7 @@ body {
   transition: all .3s ease;
   outline: none;
   font-weight: bold;
+  margin-left: 20px;
 }
 
 .new:hover {
@@ -186,10 +195,69 @@ body {
   fill: #fff;
 }
 
+.controls {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.toggle-wrapper {
+  display: flex;
+}
+
+input[type="checkbox"] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  -webkit-tap-highlight-color: transparent;
+  cursor: pointer;
+
+  &:focus {
+    outline: 0;
+  }
+}
+
+.toggle {
+  height: 32px;
+  width: 60px;
+  border-radius: 16px;
+  display: inline-block;
+  position: relative;
+  margin: 0;
+  border: 2px solid #fff;
+  background: transparent;
+  transition: all .2s ease;
+
+  &:after {
+    content: 'x';
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 25px;
+    top: 2px;
+    left: 2px;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: white;
+    transition: all .2s cubic-bezier(.5, .1, .75, 1.35);
+  }
+
+  &:checked {
+    &:after {
+      content: 'o';
+      transform: translatex(28px);
+    }
+  }
+}
+
+
 @keyframes fadeOut {
   0% {
     height: 300px;
   }
+
   100% {
     height: 0;
     display: none;
@@ -201,9 +269,16 @@ body {
     height: 0;
     width: 0;
   }
+
   100% {
     height: 70vh;
     width: 70vw;
     display: flex;
+  }
+}
+
+@media screen and (min-width : 320px) and (max-width : 480px) {
+  .App {
+    flex-direction: column !important;
   }
 }

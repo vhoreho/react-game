@@ -3,6 +3,7 @@ import { getStatus, getWinner, useStateWithLocalStorage } from "../utils";
 import Board from "./Board";
 import Modal from "./Modal";
 import MusicPlayer from "./MusicPlayer";
+import { ToggleBtn } from "./ToggleBtn";
 
 const Game = () => {
   const [store, setStore] = useStateWithLocalStorage(
@@ -76,7 +77,8 @@ const Game = () => {
       <div className="game-info">
         <p className="status">{getStatus(store[step], isNext)}</p>
         {renderMoves()}
-        <div>
+        <div className='controls'>
+          <ToggleBtn onClick={() => setIsNext(!isNext)}/>
           <button onClick={handleNewGame} className="new">
             Новая игра
           </button>
