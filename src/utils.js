@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 export function getWinner(squares) {
   const lines = [
@@ -66,3 +66,22 @@ export const useStateWithLocalStorage = (defaultValue, localStorageKey) => {
 
   return [value, setValue];
 };
+
+export const useKey = (key, cb) => {
+  const callbackRef = useRef(cb)
+
+  useEffect(() => {
+    callbackRef.current = cb;
+  })
+
+  useEffect(() => {
+    function handle(event) {
+      console.log(event)
+      if(event.code === key) {
+        callbackRef.current(event)
+      }
+    }
+    window.addEventListener('keypress', handle)
+    return () => window.removeEventListener('keypress', handle)
+  }, [key])
+}

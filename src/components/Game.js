@@ -1,5 +1,10 @@
 import React from "react";
-import { getStatus, getWinner, useStateWithLocalStorage } from "../utils";
+import {
+  getStatus,
+  getWinner,
+  useStateWithLocalStorage,
+  useKey,
+} from "../utils";
 import Board from "./Board";
 import Modal from "./Modal";
 import MusicPlayer from "./MusicPlayer";
@@ -53,9 +58,14 @@ const Game = () => {
     setStore([Array(9).fill(null)]);
     setStep(0);
     setStat({ ...stat, [winner]: ++stat[winner] });
-    setIsNext(true)
+    setIsNext(true);
   };
 
+  function handleChangeWhoIsNext() {
+    !step && setIsNext(!isNext);
+  }
+
+  useKey("KeyC", handleChangeWhoIsNext);
   return (
     <React.Fragment>
       <div className="board-and-stat">
@@ -79,13 +89,15 @@ const Game = () => {
         <p className="status">{getStatus(store[step], isNext)}</p>
         {renderMoves()}
         <div className="controls">
-          {!step && <ToggleBtn onClick={() => setIsNext(!isNext)} />}
+          {!step && (
+            <ToggleBtn onClick={() => setIsNext(!isNext)} whoIsNext={isNext} />
+          )}
           <button onClick={handleNewGame} className="new">
             Новая игра
           </button>
         </div>
+        <MusicPlayer />
       </div>
-      <MusicPlayer />
       {winner && <Modal win={winner} onClick={handleNewGame} />}
     </React.Fragment>
   );
