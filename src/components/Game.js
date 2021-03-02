@@ -11,7 +11,7 @@ const Game = () => {
     "store"
   );
   const [step, setStep] = useStateWithLocalStorage(0, "step");
-  const [isNext, setIsNext] = useStateWithLocalStorage(true, 'isNext');
+  const [isNext, setIsNext] = useStateWithLocalStorage(true, "isNext");
   const [stat, setStat] = useStateWithLocalStorage(
     {
       X: 0,
@@ -53,6 +53,7 @@ const Game = () => {
     setStore([Array(9).fill(null)]);
     setStep(0);
     setStat({ ...stat, [winner]: ++stat[winner] });
+    setIsNext(true)
   };
 
   return (
@@ -77,13 +78,14 @@ const Game = () => {
       <div className="game-info">
         <p className="status">{getStatus(store[step], isNext)}</p>
         {renderMoves()}
-        <div className='controls'>
-          <ToggleBtn onClick={() => setIsNext(!isNext)}/>
+        <div className="controls">
+          {!step && <ToggleBtn onClick={() => setIsNext(!isNext)} />}
           <button onClick={handleNewGame} className="new">
             Новая игра
           </button>
         </div>
       </div>
+      <MusicPlayer />
       {winner && <Modal win={winner} onClick={handleNewGame} />}
     </React.Fragment>
   );

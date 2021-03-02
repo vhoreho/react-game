@@ -56,15 +56,11 @@ export const useAudio = (url) => {
 export const useStateWithLocalStorage = (defaultValue, localStorageKey) => {
   const [value, setValue] = useState(() => {
     const localStorageValue = window.localStorage.getItem(localStorageKey);
-
-    console.log(JSON.parse(localStorageValue));
-
     return localStorageValue == null
       ? defaultValue : JSON.parse(localStorageValue);
   });
 
   useEffect(() => {
-    console.log('render localstorage hook');
     window.localStorage.setItem(localStorageKey, JSON.stringify(value));
   }, [localStorageKey, value]);
 
