@@ -1,2 +1,2 @@
-[Игра крестики нолики](vhoreho-react-game.netlify.app)
+[Игра крестики нолики](https://vhoreho-react-game.netlify.app)
 
