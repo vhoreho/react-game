@@ -1,3 +1,5 @@
+// General styles
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -257,6 +259,38 @@ input[type="checkbox"] {
   ul {
     list-style: none;
     padding: 0;
+  }
+}
+
+// Footer styles
+
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  &-info {
+    display: flex;
+    align-items: center;
+  }
+  &-github-link {
+    margin: 0 20px;
+    color: #fff;
+    transition: all .3s ease;
+    &:hover {
+      color: rgba(255, 255, 255, .7);
+    }
+  }
+  &-school-link {
+    color: #fff;
+    transition: all .3s ease;
+    &:hover {
+      color: rgba(255, 255, 255, .7);
+    }
+  }
+  &-date{}
+  &-school-img {
+    width: 70px;
+    margin: 0 20px;
   }
 }
 
