@@ -1,1 +1,2 @@
-Игра крестики нолики
+[Игра крестики нолики](vhoreho-react-game.netlify.app)
+
