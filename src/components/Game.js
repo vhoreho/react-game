@@ -36,6 +36,7 @@ const Game = () => {
     squares[i] = isNext ? "X" : "O";
     setStore([...timeInStore, squares]);
     setStep(timeInStore.length);
+    if (winner) setIsNext(true);
     setIsNext(!isNext);
   };
 
@@ -65,7 +66,16 @@ const Game = () => {
     !step && setIsNext(!isNext);
   }
 
+  function handleResetStat() {
+    setStat({
+      X: 0,
+      O: 0,
+      draw: 0,
+    });
+  }
+
   useKey("KeyC", handleChangeWhoIsNext);
+  useKey("KeyR", handleResetStat);
   return (
     <React.Fragment>
       <div className="board-and-stat">
@@ -97,6 +107,16 @@ const Game = () => {
           </button>
         </div>
         <MusicPlayer />
+        <div className="hotkeys">
+          Горячие клавиши:
+          <ul>
+            <li>C - Изменить порядок ходов (Х или О)</li>
+            <li>R - Сбросить статистику</li>
+            <li>P - Включить/Выключить музыку</li>
+            <li>O - Повысить громкость</li>
+            <li>L - Уменьшить громкость</li>
+          </ul>
+        </div>
       </div>
       {winner && <Modal win={winner} onClick={handleNewGame} />}
     </React.Fragment>

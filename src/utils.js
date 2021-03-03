@@ -31,28 +31,6 @@ export function getStatus(matrix, nextStep) {
   }
 }
 
-export const useAudio = (url) => {
-  const [audio, setAudio] = useState(new Audio(url));
-  const [playing, setPlaying] = useState(false);
-
-  const toggle = () => setPlaying(!playing);
-
-  const addAudio = (url) => setAudio(url);
-
-  useEffect(() => {
-    playing ? audio.play() : audio.pause();
-  }, [playing, audio]);
-
-  useEffect(() => {
-    audio.addEventListener("ended", () => setPlaying(false));
-    return () => {
-      audio.removeEventListener("ended", () => setPlaying(false));
-    };
-  }, [audio]);
-
-  return [playing, toggle, addAudio];
-};
-
 export const useStateWithLocalStorage = (defaultValue, localStorageKey) => {
   const [value, setValue] = useState(() => {
     const localStorageValue = window.localStorage.getItem(localStorageKey);
